@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>  
+        <title> Archivos Adjuntos</title>  
+        <style type="text/css">  
+            table {  
+                border-collapse: collapse;  
+                width: 100%;  
+            }  
+            th, td {  
+                text-align: left;  
+                padding: 8px;  
+            }  
+
+            tr:nth-child(even){background-color: #f2f2f2}  
+            th {  
+                background-color: #4CAF50;  
+                color: white;  
+            }  
+        </style>  
+    </h:head>  
+    <h:body>  
+        <h:form>  
+            <center>  
+                <h2><h:outputText value="Archivos adjuntos"/></h2>
+            </center>  
+            <h:dataTable  value="#{attachmentController.files}" var="file"   
+                          class="table table-stripeds table-hover table-bordered">  
+                <h:column>  
+                    <f:facet name="header">Id</f:facet>  
+                    <h:outputText value="#{file.id}"/>  
+                </h:column>        
+                <h:column>  
+                    <f:facet name="header">Nombre</f:facet>  
+                    <h:inputText value="#{file.name}" size="10" rendered="#{file.editable}"/>       
+                    <h:outputText value="#{file.name}" rendered="#{not file.editable}"/>  
+                </h:column>  
+                <h:column>  
+                    <f:facet name="header">Dependencia</f:facet>  
+                    <h:inputText value="#{file.dependence}" size="10" rendered="#{file.editable}"/> 
+                    <h:outputText value="#{file.dependence}" rendered="#{not file.editable}"/>  
+                </h:column>  
+                <h:column>  
+                    <f:facet name="header">Fecha</f:facet> 
+                    <h:inputText value="#{file.date}" size="10" rendered="#{file.editable}">
+                        <f:convertDateTime pattern="yyyy/MM/dd" />
+                    </h:inputText> 
+                    <h:outputText value="#{file.date}" rendered="#{not file.editable}">
+                         <f:convertDateTime pattern="yyyy/MM/dd" />
+                    </h:outputText> 
+                   
+                </h:column>  
+                <div class="form-group">  
+                    <h:outputText value="Archivo: "/>
+                    <h:inputFile id="file" value="#{attachmentController.uploadedFile}"
+                                 validator="#{attachmentController.validateFile}"/>
+                </div>
+                <h:column>  
+                    <f:facet name="header">Actualizar</f:facet>
+                    <h:commandLink value="Editar" action="#{attachmentController.findFileById(file)}" rendered="#{not file.editable}"></h:commandLink>
+
+                </h:column>  
+                <h:column>  
+                    <f:facet name="header">Eliminar</f:facet>
+                    <h:commandButton action = "#{attachmentController.deleteFile(file.id)}" value="Eliminar" class="btn btn-danger">
+                    </h:commandButton>
+                </h:column> 
+
+            </h:dataTable>  
+            <center>
+                <h:commandButton action = "create" value="Subir archivo" class="btn btn-success"></h:commandButton>
+                <h:commandButton action = "#{attachmentController.updateDataFiles}" value="Actualizar" class="btn btn-success"></h:commandButton> 
+            </center>  
+        </h:form>
+    </h:body>  
+</html>
+

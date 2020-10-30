@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Subir Archivo</title>
+    </h:head>
+    <h:body>
+        <h:form id="form" class="form-horizontal" style="text-align: center" enctype="multipart/form-data">  
+            <div class="form-group">  
+                <div class="col-sm-4"></div>  
+                <div  class="col-sm-4">  
+                    <h2 style="text-align: center">Cargar Archivos</h2>  
+                </div>  
+            </div>  
+            <hr/>    
+            <div class="form-group">  
+                <h:outputLabel for="name" class="control-label col-sm-4">Nombre del Archivo</h:outputLabel>  
+                <div class="col-sm-4">  
+                    <h:inputText id="name" value="#{attachmentController.nameToCreate}" class="form-control">  
+                    </h:inputText>  
+                </div>  
+            </div>  
+            <div class="form-group">  
+                <h:outputLabel for="dependence" class="control-label col-sm-4">Dependencia</h:outputLabel>  
+                <div class="col-sm-4"> 
+                    <h:inputText id="dependence" value="#{attachmentController.dependenceToCreate}" class="form-control">   
+                    </h:inputText>  
+                </div>  
+            </div> 
+            <div class="form-group">  
+                <h:outputLabel for="date" class="control-label col-sm-4">Fecha</h:outputLabel>  
+                <div class="col-sm-4">  
+                    <h:inputText id="date" value="#{attachmentController.dateToCreate}" class="form-control">
+                        
+                    </h:inputText>  
+                </div>  
+            </div>  
+            <div class="form-group">  
+                <h:outputText value="Archivo: "/>
+                <h:inputFile id="file" value="#{attachmentController.uploadedFile}"
+                             validator="#{attachmentController.validateFile}"/>
+            </div> 
+            <div class="form-group">  
+                <div class="col-sm-4"></div>  
+                <div class="col-sm-4">  
+                    <div class="col-sm-2">   
+                        <h:commandButton value="Guardar" action="#{attachmentController.uploadFile}" style="width: 120px;"/>
+                    </div>  
+                    <div class="col-sm-1">  
+                    </div>    
+                </div>  
+            </div>            
+        </h:form>  
+
+
+    </h:body>
+</html>
+
